@@ -1,5 +1,4 @@
 ./backtest/node_modules
 ./backtest/.serverless
-./front/node_modules
-./front/.env
-./front/.vscode
+/frontend/node_modules/
+/frontend/package-lock.json
