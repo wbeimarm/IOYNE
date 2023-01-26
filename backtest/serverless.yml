@@ -1,0 +1,75 @@
+service: backtest
+disabledDeprecations:
+  - VARIABLES_RESOLUTION_MODE
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  stage: dev
+  apiGateway:
+    shouldStartNameWithService: true
+    binaryMediaTypes:
+    - 'multipart/form-data'
+  environment:
+    bucketName: ${self:custom.bucketName}
+    imageUploadBucket: ${self:custom.imageUploadBucket}
+    region: ${self:provider.region}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: '*'       
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - lambda:InvokeAsync
+      Resource: '*'      
+
+custom:
+  bucketName: images-buckets-dev-test-12345
+  imageUploadBucket: images-buckets-dev-test-123456
+  webpack:
+    includeModules:
+      forceInclude:
+        - node_modules
+
+functions:
+  hello:
+    handler: handler.hello
+  login:
+    handler: handler.login
+    events:
+      - http:
+          path: login
+          method: post
+  procedure:
+      handler: handler.procedure
+      events:
+        - http:
+            path: procedure
+            method: post
+  procedureget:
+      handler: handler.procedure
+      events:
+        - http:
+            path: procedure
+            method: get          
+  imageUpload:
+    handler: handler.imageupload
+    events:
+      - http:
+          path: image-upload
+          method: POST
+          cors: true
+
+resources:
+  Resources:
+    DemoBucketUpload:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+    ImageUploadBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.imageUploadBucket}
+        AccessControl: PublicRead  

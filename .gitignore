@@ -1,0 +1,5 @@
+./backtest/node_modules
+./backtest/.serverless
+./front/node_modules
+./front/.env
+./front/.vscode
