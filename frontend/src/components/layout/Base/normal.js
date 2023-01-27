@@ -1,13 +1,11 @@
 import React from "react";
-import { Container } from '@mui/material';
+import '../../vistas/assets/styles.css'
 
 const Base = ({ children, ...rest }) => {
     return (
         <div {...rest}>
-            <div >
-                <Container>
-                    {children}
-                </Container>
+            <div className="container">
+                {children}
             </div>
         </div>
     )

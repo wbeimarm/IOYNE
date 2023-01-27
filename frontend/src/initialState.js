@@ -1,4 +1,4 @@
-export const initialState = {
+export default {
     discount: [
       {
         m: [3, 2],

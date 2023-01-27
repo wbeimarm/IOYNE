@@ -25,7 +25,7 @@ import Logout from "./components/seguridad/Logout";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+         <div className="App">
         <BrowserRouter>
           <ResponsiveAppBar />
           <Routes>
@@ -35,7 +35,7 @@ function App() {
             <Route path="/Logout" element={<Logout />} />
           </Routes>
         </BrowserRouter>
-      </div>
+        </div>
     </ThemeProvider>
   );
 }

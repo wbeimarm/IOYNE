@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class Configuration {
-    baseURL = process.env.URL || 'http://localhost:3000';
+    baseURL = process.env.URL;
 
     user = "";
 
