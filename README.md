@@ -16,5 +16,7 @@ Este proyecto permite implementar un CRM a la medida
 Plataforma en la nube que permita gestionar usuarios, clientes y
 cotizaciones
 ````
+![Build Status](https://images-buckets-dev-123456.s3.amazonaws.com/2023-02-03T04:36:47.525Zcotizacion.PNG)
+
 
 ![Build Status](https://res.cloudinary.com/drqk6qzo7/image/upload/v1674788076/menu_js6pdj.png)
