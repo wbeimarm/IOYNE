@@ -17,24 +17,25 @@ const Product = ({ product, handleAddToCart }) => {
         className="Products-item-img"
         component="img"
         height="140"
-        image={product.image}
+        image={product.imagen}
         alt="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-        {product.name}
+        {product.nombre}
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
            $
                   {' '}
-                     {product.price}
+                     {product.valorVenta}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        {product.description}
+        {product.nombre}
         </Typography>
+     
       </CardContent>
       <CardActions>
-        <Button onClick={handleAddToCart(product)} size="small">Comprar</Button>
+        <Button  onClick={()=> handleAddToCart(product)} variant="contained">Agregar a la cotización</Button>
       </CardActions>
     </CardActionArea>
   </Card>    

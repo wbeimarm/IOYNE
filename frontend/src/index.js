@@ -4,18 +4,32 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from "./components/seguridad/auth";
-import { initialState } from "./sesion/initialState";
-import { StateProvider } from "./sesion/store";
-import { mainReducer } from "./sesion/reducers";
+import { Provider } from 'react-redux';
+import {
+  applyMiddleware,
+  compose,
+  legacy_createStore as createStore,
+} from 'redux';
+import thunk from 'redux-thunk';
+// import { logger } from './middlewares';
+import rootReducer from './reducers/rootReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// const composedEnhancers = composeAlt(applyMiddleware(thunk, logger));
+const composedEnhancers = composeAlt(applyMiddleware(thunk));
+
+const store = createStore(rootReducer, composedEnhancers);
+
 root.render(
   <React.StrictMode>
-     <StateProvider initialState={initialState} reducer={mainReducer}>
+     <Provider store={store}>
         <AuthProvider>
           <App />
         </AuthProvider>
-      </StateProvider>
+      </Provider>
   </React.StrictMode>
 );
 

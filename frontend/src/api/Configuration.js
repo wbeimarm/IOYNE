@@ -1,8 +1,8 @@
 import axios from "axios";
 
 class Configuration {
-    baseURL = process.env.URL;
-
+    baseURL = process.env.URL || 'http://localhost';
+    
     user = "";
 
     API = {};

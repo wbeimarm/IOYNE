@@ -1,4 +1,5 @@
 ./backtest/node_modules
 ./backtest/.serverless
 /frontend/node_modules/
+/frontend/.env
 /frontend/package-lock.json

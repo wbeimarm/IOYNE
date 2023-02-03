@@ -14,10 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import image from '../../enyoitwo.ico'
 
-const pages = ['Login', 'Logout'];
-const settings = ['Login', 'Logout'];
-
 function ResponsiveAppBar() {
+  let token = sessionStorage.getItem("token");
+  let settings = ['Login'];
+  if(token) {
+    settings = token !== undefined && token.length > 2 ? ['Home', 'Cliente', 'CrearProductos', 'Cotizacion', 'Logout'] : ['Login'] ;
+  }
+  const pages = [];
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -145,11 +148,11 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
-            </Tooltip>
+            </Tooltip> 
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -168,7 +171,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}
+                  <Typography textAlign="center">
                     <Link style={{textDecoration: "none" , color: "white" }} to={`/${setting}`}>{setting}</Link>
                   </Typography>
                 </MenuItem>

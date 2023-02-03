@@ -1,6 +1,5 @@
 .container {
-  width: 95%;
-  /* background: #fff; */
+  width: 100%;
   background: linear-gradient(70deg, blue, pink);
   margin: auto;
   display: flex;
@@ -24,7 +23,7 @@
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
   }
 
   @media screen and (min-width:400px) {

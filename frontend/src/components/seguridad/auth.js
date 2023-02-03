@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import LoginService from "../../api/LoginService";
 import ClientesService from "../../api/ClientesService";
+import DataService from "../../api/DataService";
 export const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
@@ -10,7 +11,8 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [loginService, setLoginService] = useState();
     const [clientesService, setClientesService] = useState();
-
+    const [dataService, setDataService] = useState();
+    
     useEffect(() => {
         // servicio para el login
         setLoginService(new LoginService());
@@ -23,6 +25,8 @@ export const AuthProvider = ({ children }) => {
             setUser(JSON.parse(sessionStorage.getItem("perfil")));
             setClientesService(new ClientesService(token));
             setAutorizado(true);
+        } else {
+            sessionStorage.removeItem("products");
         }
 
         setLoading(false);
@@ -48,30 +52,43 @@ export const AuthProvider = ({ children }) => {
             );
             setUser(respuestaValidarCliente);
             setAutorizado(true);
-            
-            console.log('respuestaValidarCliente', respuestaValidarCliente)
             return respuestaValidarCliente;
         },
         []
     );
 
-    const salir = () => {
-        sessionStorage.removeItem("perfil");
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("password");
-        setAutorizado(false);
-    };
+    // buscar valores de la base de datos
+    const buscardataService = useCallback(
+        async (name, parameter) => {
+            const buscardataServiceTemp = new DataService();
+            const respuestaData = await buscardataServiceTemp.buscarDataService(
+                name,
+                parameter
+            );
+            setDataService(respuestaData);
+            return respuestaData;
+        },
+        []
+    );    
+
+    // const salir = () => {
+    //     sessionStorage.removeItem("perfil");
+    //     sessionStorage.removeItem("token");
+    //     sessionStorage.removeItem("password");
+    //     setAutorizado(false);
+    // };
 
     return (
         <AuthContext.Provider
             value={{
-                autorizado,
+                // autorizado,
                 asignarTokenServicios,
-                clientesService,
-                user,
-                loading,
-                loginService,
-                salir,
+                // clientesService,
+                // user,
+                // loading,
+                // loginService,
+                // salir,
+                buscardataService,
             }}
         >
             {children}

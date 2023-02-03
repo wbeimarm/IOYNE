@@ -1,14 +1,13 @@
-import React from 'react'
 import Base from '../../layout/Base/normal';
 import Products from '../Products'
-import initialState from '../../../initialState'
-import Cart from '../Cart'
+import { useSelector } from "react-redux";
 
 export default function Home() {
+    let products = useSelector((state) => state.ui.products); 
+  
     return (
         <Base>
-            <Products products={initialState.products} />
-            <Cart />
+            <Products products={products} />
         </Base>
     )
 }
