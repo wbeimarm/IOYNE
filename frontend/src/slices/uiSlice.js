@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current  } from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
@@ -8,6 +8,7 @@ const initialState = {
   products: [],
   usuarios: [],
   cotizaciones: [],
+  cart: [],
 };
 
 export const uiSlice = createSlice({
@@ -31,10 +32,16 @@ export const uiSlice = createSlice({
     },
     setCotizaciones: (state, action ) => {
       state.cotizaciones = action.payload;
-    }        
+    },
+    setCart: (state, action ) => {
+      state.cart = action.payload;
+    },
+    setRemoveCart: (state, action) => {
+      state.cart = [];
+    }              
   },
 });
 
-export const { setToken, setPerfil, setRutas, setProducts ,setUsuarios, setCotizaciones } = uiSlice.actions;
+export const { setToken, setPerfil, setRutas, setProducts ,setUsuarios, setCotizaciones, setCart , setRemoveCart } = uiSlice.actions;
 
 export default uiSlice.reducer;

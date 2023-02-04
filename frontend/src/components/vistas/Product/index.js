@@ -21,21 +21,17 @@ const Product = ({ product, handleAddToCart }) => {
         alt="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-        {product.nombre}
+     <Typography gutterBottom variant="h6" component="div">
+     {product.nombre}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div">
-           $
+        <Typography variant="body2" color="text.secondary">
+        $
                   {' '}
                      {product.valorVenta}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-        {product.nombre}
-        </Typography>
-     
       </CardContent>
       <CardActions>
-        <Button  onClick={()=> handleAddToCart(product)} variant="contained">Agregar a la cotización</Button>
+        <Button  onClick={()=> handleAddToCart(product)} variant="contained">Agregar</Button>
       </CardActions>
     </CardActionArea>
   </Card>    

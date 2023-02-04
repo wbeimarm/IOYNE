@@ -35,7 +35,7 @@ export default function CrearProductos() {
     const dispatch = useDispatch();
     const { buscardataService } = useAuth();
     const onTextChangeNombre = (e) => setNombre(e.target.value);
-    let url_imagen = process.env.URL_IMAGE || 'http://localhost';
+    let url_imagen = process.env.URL_IMAGE || 'htts://locahost';
     
     const onTextChangeImagen = (e) => {
         const formData = new FormData();
@@ -44,11 +44,6 @@ export default function CrearProductos() {
         axios
           .post(url_imagen, formData)
           .then((res) => {
-            console.log('res')
-            console.log(res)
-            console.log('res.data')
-            console.log(res.data)
-            console.log(res.data.link)
             setImagen(res.data.link)
             alerta(0,'Imagen', 'La imagen se guardo con exito puede seguir ingresando los otros datos')
           })

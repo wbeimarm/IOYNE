@@ -5,8 +5,10 @@ const useInitialState = () => {
   const [state, setState] = useState(initialState)
 
   const addToCart = payload => {
+    console.log('state')
+    console.log(state.cart)
     const newCartItems = state.cart.find((x) => x.productoId === payload.productoId)
-    if (newCartItems != undefined) {
+    if (newCartItems !== undefined) {
       setState({
         ...state,
         cart: state.cart.map((item) =>
@@ -18,15 +20,14 @@ const useInitialState = () => {
     } else {
       setState({
         ...state,
-        cart: [...state.cart, { ...payload, count: 1, total: payload.valorVenta * 1 }]
+        cart: [...state.cart, { ...payload, count: payload.count === undefined ? 1 : payload.count, total: payload.valorVenta * (payload.count === undefined ? 1 : payload.count) }]
       })
     }
   }
 
   const removeFromCart = payload => {
     const deleteCartItems = state.cart.find((x) => x.productoId === payload.productoId)
-    const count = deleteCartItems.count
-    if (count === 1) {
+    if (deleteCartItems != undefined && deleteCartItems.count === 1) {
       setState({
         ...state,
         cart: state.cart.filter(items => items.productoId !== payload.productoId)
@@ -43,9 +44,20 @@ const useInitialState = () => {
     }
   }
 
+  const removeState = payload => {
+      setState({
+        discount: [],
+        cart: [],
+        products: [],
+      })
+  }  
+
+
+
   return {
     addToCart,
     removeFromCart,
+    removeState,
     state
   }
 }
