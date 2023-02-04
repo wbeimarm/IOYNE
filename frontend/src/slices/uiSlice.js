@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   token: null,
   perfil: null,
+  perfilCliente: null,
   rutas: null,
   products: [],
   usuarios: [],
@@ -21,6 +22,9 @@ export const uiSlice = createSlice({
     setPerfil: (state, action) => {
       state.perfil = action.payload;
     },
+    setPerfilCliente: (state, action) => {
+      state.perfilCliente = action.payload;
+    },    
     setRutas: (state, action) => {
       state.rutas = action.payload;
     },
@@ -42,6 +46,6 @@ export const uiSlice = createSlice({
   },
 });
 
-export const { setToken, setPerfil, setRutas, setProducts ,setUsuarios, setCotizaciones, setCart , setRemoveCart } = uiSlice.actions;
+export const { setToken, setPerfil, setRutas, setProducts ,setUsuarios, setCotizaciones, setCart , setRemoveCart, setPerfilCliente } = uiSlice.actions;
 
 export default uiSlice.reducer;
