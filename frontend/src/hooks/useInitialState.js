@@ -5,8 +5,6 @@ const useInitialState = () => {
   const [state, setState] = useState(initialState)
 
   const addToCart = payload => {
-    console.log('state')
-    console.log(state.cart)
     const newCartItems = state.cart.find((x) => x.productoId === payload.productoId)
     if (newCartItems !== undefined) {
       setState({

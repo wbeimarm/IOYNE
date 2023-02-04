@@ -1,16 +1,7 @@
 import React from 'react';
 import AuthRegister from './AuthRegister'
-import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-
-const Img = styled('img')({
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  });
-
   
 const Login = () => (
     <Paper

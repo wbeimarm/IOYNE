@@ -84,7 +84,7 @@ export default function CrearProductos() {
               let parameters = {
                 "name": "cualquiercosa",
                 "parameters": {
-                    "afn": "SELECT productoId as id, nombre, imagen, costo, valorVenta,existencia FROM producto"
+                    "afn": "select productoId as productoId, productoId as id,nombre, imagen, costo,valorVenta,existencia,estado from producto"
                     }
                 }
               

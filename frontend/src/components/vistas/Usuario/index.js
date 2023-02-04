@@ -17,7 +17,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 export default function Usuario() {
     let perfil = useSelector((state) => state.ui.perfil); 
-    console.log(perfil[0].Rol)
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
     const [nuevaClave, setNuevaClave] = useState(undefined);

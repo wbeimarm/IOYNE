@@ -21,10 +21,6 @@ export const AuthProvider = ({ children }) => {
         const token = sessionStorage.getItem("token");
 
         if (token) {
-            // iniciar perfil
-            setUser(JSON.parse(sessionStorage.getItem("perfil")));
-            setClientesService(new ClientesService(token));
-            setAutorizado(true);
         } else {
             sessionStorage.removeItem("products");
         }
@@ -71,23 +67,10 @@ export const AuthProvider = ({ children }) => {
         []
     );    
 
-    // const salir = () => {
-    //     sessionStorage.removeItem("perfil");
-    //     sessionStorage.removeItem("token");
-    //     sessionStorage.removeItem("password");
-    //     setAutorizado(false);
-    // };
-
     return (
         <AuthContext.Provider
             value={{
-                // autorizado,
                 asignarTokenServicios,
-                // clientesService,
-                // user,
-                // loading,
-                // loginService,
-                // salir,
                 buscardataService,
             }}
         >

@@ -1,5 +1,5 @@
 import React from "react";
-import '../../vistas/assets/styles.css'
+import '../../vistas/assets/Styles.css'
 
 const Base = ({ children, ...rest }) => {
     return (

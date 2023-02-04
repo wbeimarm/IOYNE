@@ -16,8 +16,7 @@ import { styled } from '@mui/material/styles';
 import {  Button, Typography } from '@mui/material';
 import Alerts from '../../utils/Alerts';
 import Divider from '@mui/material/Divider';
-import '../../vistas/assets/styles.css'
-// import { setCotizaciones, setCart , setRemoveCart } from '../../../slices/uiSlice';
+import '../../vistas/assets/Styles.css'
 import { setCotizaciones } from '../../../slices/uiSlice';
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -32,10 +31,8 @@ const Item = styled(Paper)(({ theme }) => ({
 const _ = require('underscore')
 
 export default function Cotizacion({ handleAddToCart }) {
-  const { state, removeFromCart, addToCart, removeState } = useContext(AppContext)
-  let { cart } = state
-  console.log('cart')
-  console.log(cart)
+    const { state, removeFromCart, addToCart, removeState } = useContext(AppContext)
+    let { cart } = state
  
     const dispatch = useDispatch();
     const { buscardataService } = useAuth();    
@@ -48,8 +45,6 @@ export default function Cotizacion({ handleAddToCart }) {
         descripcion: ''
     });    
     let products = useSelector((state) => state.ui.products);
-    // let cart = useSelector((state) => state.ui.cart);
-    // const [cartData, setCartData] = useState(cart)
     const [stateGrid, setStateGrid] = useState({
       columns: [ { field: 'nombre', headerName: 'nombre', width: 150 },
       { field: 'count', headerName: 'count', width: 150 },
@@ -66,7 +61,6 @@ export default function Cotizacion({ handleAddToCart }) {
                  fecha: '', estado: '', cliente: '', productoId: '', usuarioId: '' }],
   });
   
-  // const [update, setUpdate] = useState(false);
   
     useEffect(() => {
         let isSubscribed = true;
@@ -96,12 +90,13 @@ export default function Cotizacion({ handleAddToCart }) {
       }, [])    
 
     const setNameClienteOnChange = (e) => {
-        onReset()
-        // dispatch(setRemoveCart())
-        setNameCliente(e)
-        // setUpdate(false);        
-        buscarCotizacionPorCliente(e.id, 'id', false)
-        handleSumTotal()
+        if(e != null) {
+          onReset()
+          setNameCliente(e)
+          buscarCotizacionPorCliente(e.id, 'id', false)
+          handleSumTotal()
+        }
+        
     }
 
     const buscarCotizacionPorCliente = async (id, queHago, actualizando) => {
@@ -119,15 +114,13 @@ export default function Cotizacion({ handleAddToCart }) {
       )
       
       if(actualizando) {
-        // dispatch(setCart(data.data[0]))
         addToCart(data.data[0])
       }
       dispatch(setCotizaciones(data.data[0]))
       sessionStorage.setItem("cotizaciones", JSON.stringify(data.data[0]));
       setStateGrid({
           columns: stateGrid.columns, 
-          rows: data.data[0]})
-      // setUpdate(false)                          
+          rows: data.data[0]})                        
     }
  
     const handleRemove = (product) => {
@@ -158,7 +151,6 @@ export default function Cotizacion({ handleAddToCart }) {
 
     const incrementQuantity = (e) => {
       addToCart(e)
-      // dispatch(setCart(e))
     }
 
     const guardarCotizacionHandler = async () => {
@@ -222,10 +214,6 @@ export default function Cotizacion({ handleAddToCart }) {
   }
 
   const onClickGrid = (e) => {
-    // onReset()
-    // let consecutivo = `'${e.row.consecutivo}'`
-    // buscarCotizacionPorCliente(consecutivo, 'consecutivo', true)
-    // handleSumTotal()
     alerta(1,'Advertencia', 'La forma de actualizar una cotización se encuentra en desarrollo');
   }
 

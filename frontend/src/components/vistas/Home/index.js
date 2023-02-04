@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Base from '../../layout/Base/normal';
-import Products from '../Products'
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { Chart } from "react-google-charts";
 import { setCotizaciones } from '../../../slices/uiSlice';
 import { useAuth } from "../../seguridad/auth";
@@ -9,21 +8,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 
-
-
-
-//   if(actualizando) {
-//     // dispatch(setCart(data.data[0]))
-//     addToCart(data.data[0])
-//   }
-//   dispatch(setCotizaciones(data.data[0]))
-//   sessionStorage.setItem("cotizaciones", JSON.stringify(data.data[0]));
-//   setStateGrid({
-//       columns: stateGrid.columns, 
-//       rows: data.data[0]})
-
 export default function Home() {
-    // let products = useSelector((state) => state.ui.products); 
+    
     const dispatch = useDispatch();
     const { buscardataService } = useAuth(); 
     const [dataGrafica, setDataGrafica] = useState([[]])
@@ -65,7 +51,6 @@ export default function Home() {
                 columns: stateGrid.columns, 
                 rows: data.data[0]})   
           }
-          console.log(data.data[0])
           setDataGrafica(
                             [
                     ['nombre', 'count', 'valorVenta'],
@@ -119,7 +104,6 @@ export default function Home() {
                 </div>
               </div>
           </Box>
-            {/* <Products products={products} /> */}
         </Base>
     )
 }

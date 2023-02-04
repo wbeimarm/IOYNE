@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { TextField } from '@mui/material';
-
 import {
     Button,
     Typography
 } from '@mui/material';
 import { useAuth } from "./auth";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setToken, setPerfil, setRutas, setProducts, setUsuarios, setCotizaciones } from '../../slices/uiSlice';
 import { useNavigate } from 'react-router-dom';
 import Alerts from '../utils/Alerts';
@@ -19,8 +18,7 @@ const AuthRegister = () => {
         descripcion: ''
     });    
     const navigate = useNavigate();
-    const { asignarTokenServicios, buscardataService } = useAuth();
-    const token = useSelector((state) => state.ui.token);
+    const { buscardataService } = useAuth();
     const dispatch = useDispatch();
     const [correo, setCorreo] = useState("");
     const [clave, setClave] = useState("");
@@ -51,7 +49,6 @@ const AuthRegister = () => {
                 alerta(1,'Alertta', perfil.data[0][0].mensaje)
                 return
             }
-            console.log(perfil.data)            
             dispatch(setToken(perfil.data[0].token))
             dispatch(setPerfil(perfil.data[0]))
             dispatch(setRutas(perfil.data[1]))
