@@ -14,9 +14,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import Base from '../../layout/Base/normal';
 import Autocomplete from '@mui/material/Autocomplete';
+import { LocalAtmRounded } from '@mui/icons-material';
 
 export default function Usuario() {
     let perfil = useSelector((state) => state.ui.perfil); 
+    let perfilesCliente = useSelector((state) => state.ui.perfiles); 
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
     const [nuevaClave, setNuevaClave] = useState(undefined);
@@ -38,9 +40,6 @@ export default function Usuario() {
     const onTextChangeCorreo = (e) => setCorreo(e.target.value);
     const onTextChangeNuevaClave = (e) => setNuevaClave(e.target.value);
     const onTextChangeRepitaClave = (e) => setRepitaClave(e.target.value);            
-
-    
-
 
     const onReset = () => {
         setNombre("");
@@ -143,11 +142,17 @@ export default function Usuario() {
     }
 
     const onSubmit = async () => { 
-        try {
-           let table = update ? "actualizarUsuario" : "guardarUsuario";
+        try { 
+           let table = nombreGuardar === "Actualizar" ? "actualizarUsuario" : "guardarUsuario";
            let parameters = {}
 
-           if(update) {
+           if(table === "guardarUsuario" &&  perfil[0].Rol === 'GESTOR') {
+               alerta(1,'Advertencia', 'Un gestor solo puede actualizar sus datos');
+               onReset()
+               return 
+           }   
+         
+           if(nombreGuardar === "Actualizar") {
             if (repitaClave !== undefined && repitaClave !== nuevaClave) {
                 alerta(1,'Advertencia', 'La clave no es correcta verifique..');
                 return 
@@ -155,17 +160,22 @@ export default function Usuario() {
             if(namePerfil == undefined &&  perfil[0].Rol === 'ADMIN') {
                 alerta(1,'Advertencia', 'Debe selecionar un perfil para poder guardar la información');
                 return 
-            } else {
-                setNamePerfil(perfil[0].perfilId)
             }
+            
+            if(perfil[0].Rol === 'GESTOR') {
+                setNamePerfil(2)    
+            }
+            let tipoPerfil = namePerfil !== undefined && namePerfil !== null ? namePerfil.id : namePerfil;
+            let numeroPerfilGuardar = namePerfil !== undefined ? namePerfil.id : namePerfil
             parameters = { 
                 "name": table,
             "parameters": {
                 "id": Number(id),
                 "nombre": nombre,
                 "correo": correo,
-                "clave": nuevaClave == undefined ? 'wbeimar2013__' : nuevaClave,
-                "perfilId": Number(namePerfil)
+                "clave": nuevaClave == undefined || tipoPerfil == 3 ? 'wbeimar2013__' : nuevaClave,
+                "perfilId": numeroPerfilGuardar == undefined && perfil[0].Rol === 'GESTOR' ? 2 : Number(numeroPerfilGuardar),
+                "perfilLogueado": Number(perfil[0].perfilId)
                 }
             }
            } else  {
@@ -177,7 +187,6 @@ export default function Usuario() {
                 }
             }            
            }
-           
           
             const data = await buscardataService(
                 'procedure',

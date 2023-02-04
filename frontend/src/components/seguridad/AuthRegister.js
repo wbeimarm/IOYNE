@@ -53,6 +53,7 @@ const AuthRegister = () => {
             dispatch(setPerfil(perfil.data[0]))
             dispatch(setRutas(perfil.data[1]))
             sessionStorage.setItem("token",perfil.data[0].token);
+            sessionStorage.setItem("perfil",perfil.data[0]);
            let parameters = {
             "name": "buscarProductoClienteCotizacion",
             "parameters": {

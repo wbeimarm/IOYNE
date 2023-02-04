@@ -13,9 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import image from '../../enyoitwo.ico'
+import {  useSelector } from 'react-redux';
 
 function ResponsiveAppBar() {
   let token = sessionStorage.getItem("token");
+  let perfil = useSelector((state) => state.ui.perfil);
+  if(perfil == undefined) {
+    perfil = []
+  } 
   let settings = ['Login'];
   if(token) {
     settings = token !== undefined && token.length > 2 ? ['Home', 'Cliente', 'CrearProductos', 'Cotizacion', 'Logout'] : ['Login'] ;
@@ -38,6 +43,11 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  React.useEffect(()=> {
+    console.log('perfil')
+    console.log(perfil)
+  },[perfil])
 
   return (
     <AppBar position="static">
@@ -106,6 +116,11 @@ function ResponsiveAppBar() {
                   </Typography>
                 </MenuItem>
               ))}
+              {perfil !== undefined && perfil.length > 0 ? 
+              <Typography textAlign="center">
+               {perfil[0].nombre}  -  {perfil[0].Rol}
+              </Typography> : null}
+              
             </Menu>
           </Box>
           <Typography
@@ -145,6 +160,10 @@ function ResponsiveAppBar() {
                  <Link style={{textDecoration: "none" , color: "white" }} to={`/${page}`}>{page}</Link>
               </Button>
             ))}
+            {perfil !== undefined && perfil.length > 0 ? 
+              <Typography textAlign="center">
+              {perfil[0].nombre}  -  {perfil[0].Rol}
+              </Typography> : null}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
