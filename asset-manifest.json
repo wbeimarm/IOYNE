@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/wbeimarm/IOYNE/static/css/main.d8b0f071.css",
-    "main.js": "/wbeimarm/IOYNE/static/js/main.2d7b6bbc.js",
+    "main.js": "/wbeimarm/IOYNE/static/js/main.cc96ec35.js",
     "static/js/787.e1342726.chunk.js": "/wbeimarm/IOYNE/static/js/787.e1342726.chunk.js",
     "static/media/enyoitwo.ico": "/wbeimarm/IOYNE/static/media/enyoitwo.8eb274e04fc8f12c2156.ico",
     "index.html": "/wbeimarm/IOYNE/index.html",
     "main.d8b0f071.css.map": "/wbeimarm/IOYNE/static/css/main.d8b0f071.css.map",
-    "main.2d7b6bbc.js.map": "/wbeimarm/IOYNE/static/js/main.2d7b6bbc.js.map",
+    "main.cc96ec35.js.map": "/wbeimarm/IOYNE/static/js/main.cc96ec35.js.map",
     "787.e1342726.chunk.js.map": "/wbeimarm/IOYNE/static/js/787.e1342726.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d8b0f071.css",
-    "static/js/main.2d7b6bbc.js"
+    "static/js/main.cc96ec35.js"
   ]
 }
