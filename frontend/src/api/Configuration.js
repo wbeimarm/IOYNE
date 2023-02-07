@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class Configuration {
-    baseURL = process.env.URL || 'http://localhost/';
+    baseURL = process.env.URL || 'http://localhost';
     
     user = "";
 
@@ -10,7 +10,7 @@ class Configuration {
     constructor(token, user, prefix) {
         const baseURL = prefix ? this.baseURL + prefix : this.baseURL;
         this.API = axios.create({
-            baseURL,
+            baseURL             
         });
 
         if (token)

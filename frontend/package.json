@@ -2,6 +2,8 @@
   "name": "enjoi",
   "version": "0.1.0",
   "private": true,
+  "postinstall":"patch-package",
+  "proxy": "https://oxbygdxgzb.execute-api.us-east-1.amazonaws.com/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -31,11 +33,14 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
-  "homepage": "https://github.com/wbeimarm/IOYNE",
+  "homepagegithub": "https://github.com/wbeimarm/IOYNE",
+  "homepagengrok": "https://e632-2800-e2-2500-32a3-e546-cde1-3963-ade1.ngrok.io",
+  "homepageaws": "https://ioyne.s3.amazonaws.com",
   "scripts": {
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "deployaws": "aws s3 sync build/ s3://ioyne --acl public-read",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

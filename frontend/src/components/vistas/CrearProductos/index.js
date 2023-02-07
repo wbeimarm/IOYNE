@@ -49,8 +49,6 @@ export default function CrearProductos() {
           })
           .catch((err) => 
           {
-            console.log('err')
-            console.log(err)
             alerta(1,'Imagen', 'Se genero un error al guardar la imagen intente en más tarde')
         });
     };
