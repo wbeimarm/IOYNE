@@ -39,6 +39,10 @@ export default function Cotizacion({ handleAddToCart }) {
     const [states, setStates] = useState([{label: '', id: 0 }]);
     const [nameCliente, setNameCliente] = useState(undefined);
     const [alertmensaje, setAlertmensaje] = useState(false);
+    const [consecutivo, setConsecutivo] = useState(undefined);
+    const onTextChangConsecutivo = (e) => {
+      setConsecutivo(e.target.value);            
+    }
     const [alertvaloresmensaje, setAlertvaloresmensaje] = useState({
         type:0,
         nombre:'',
@@ -95,6 +99,10 @@ export default function Cotizacion({ handleAddToCart }) {
           setNameCliente(e)
           buscarCotizacionPorCliente(e.id, 'id', false)
           handleSumTotal()
+          if(consecutivo === undefined){
+            let consecutivos = uuidv4();
+            setConsecutivo(consecutivos)
+          }
         }
         
     }
@@ -162,7 +170,10 @@ export default function Cotizacion({ handleAddToCart }) {
             alerta(1,'Advertencia', 'Debe selecionar un producto para poder guardar la cotización');
             return 
           }
-          let consecutivo = uuidv4();
+          if(consecutivo === undefined){
+            let consecutivos = uuidv4();
+            setConsecutivo(consecutivos)
+          }
           for(let i =0; i < cart.length;i++) {
             try {
               let parameters = {
@@ -187,6 +198,7 @@ export default function Cotizacion({ handleAddToCart }) {
                     rows: data.data[0]})   
                 if( cantidad - 1=== i) {
                   onReset()
+                  setConsecutivo(undefined)
                   alerta(0,'Cotización', 'La cotización fue guardada con exito..')
                 }
             } catch (error) {
@@ -212,7 +224,7 @@ export default function Cotizacion({ handleAddToCart }) {
   const onReset = () => {
     removeState(cart)
   }
-
+ 
   const onClickGrid = (e) => {
     alerta(1,'Advertencia', 'La forma de actualizar una cotización se encuentra en desarrollo');
   }
@@ -248,6 +260,13 @@ export default function Cotizacion({ handleAddToCart }) {
                   </div>
                   )}
                   <Button style={{ marginBottom: '10px'}}  onClick={()=> guardarCotizacionHandler()} variant="contained">Guardar</Button>
+                  <label>
+                          <TextField
+                            onChange={onTextChangConsecutivo}
+                            value={consecutivo}
+                            label=""
+                            />                        
+                        </label>
                 </div>
                 {cart.map(x => (
                   <Card key={uuidv4()}>
