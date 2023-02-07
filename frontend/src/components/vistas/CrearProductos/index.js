@@ -35,7 +35,7 @@ export default function CrearProductos() {
     const dispatch = useDispatch();
     const { buscardataService } = useAuth();
     const onTextChangeNombre = (e) => setNombre(e.target.value);
-    let url_imagen = process.env.URL_IMAGE || 'http://locahost';
+    let url_imagen = process.env.URL_IMAGE || 'http://localhost';
     
     const onTextChangeImagen = (e) => {
         const formData = new FormData();

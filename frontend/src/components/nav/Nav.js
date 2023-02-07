@@ -44,11 +44,6 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  React.useEffect(()=> {
-    console.log('perfil')
-    console.log(perfil)
-  },[perfil])
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

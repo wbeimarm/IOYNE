@@ -40,6 +40,7 @@ export default function Cotizacion({ handleAddToCart }) {
     const [nameCliente, setNameCliente] = useState(undefined);
     const [alertmensaje, setAlertmensaje] = useState(false);
     const [consecutivo, setConsecutivo] = useState(undefined);
+    const [descuento, setDescuento] = useState(undefined);
     const onTextChangConsecutivo = (e) => {
       setConsecutivo(e.target.value);            
     }
@@ -93,6 +94,33 @@ export default function Cotizacion({ handleAddToCart }) {
         return () => isSubscribed = false;
       }, [])    
 
+      useEffect(() => {
+        let isSubscribed = true;
+      
+        const fetchData = async () => {
+          let parameters = {
+            "name": "cualquiercosa",
+            "parameters": {
+                "afn": "select descuento, tipoDescuento, valorDescuento from parametroGeneral"
+                }
+            }
+            
+        const data = await buscardataService(
+            'procedure',
+                parameters
+        )
+        
+        if (isSubscribed) {
+          setDescuento(data.data[0])
+          }
+        }
+      
+        fetchData()
+          .catch(console.error);;
+        return () => isSubscribed = false;
+      }, [])    
+
+
     const setNameClienteOnChange = (e) => {
         if(e != null) {
           onReset()
@@ -141,21 +169,17 @@ export default function Cotizacion({ handleAddToCart }) {
       let arrayDescount = []
       for (let n = 0; n < cantidad; n++) {
         arrayDescount.push(state.cart[n].productoId)
-        // total += state.cart[n].total
         total += state.cart[n].valorVenta *  state.cart[n].count
       }
-      // const [discountState] = state.discount
-      // let exist = discountState.m
-      // exist = exist.sort()
-      // arrayDescount = arrayDescount.sort()
-      // const existForDiscount = _.isEqual(exist, arrayDescount)
-      // if (existForDiscount) {
-      //   let descuento = (discountState.discount)
-      //   descuento = descuento.toFixed(2)
-      //   total = total - descuento
-      // }
+      let descount = 0
+      if(descuento !== undefined && descuento.length> 0 && descuento[0].descuento){
+        descount = descuento[0].tipoDescuento ? total*(descuento[0].valorDescuento/100) : descuento[0].valorDescuento;
+      }
+      descount = descount.toFixed(2)
+      total = total - descount
       return total
     }
+
 
     const incrementQuantity = (e) => {
       addToCart(e)
@@ -260,14 +284,14 @@ export default function Cotizacion({ handleAddToCart }) {
                   </div>
                   )}
                   <Button style={{ marginBottom: '10px'}}  onClick={()=> guardarCotizacionHandler()} variant="contained">Guardar</Button>
-                  <label>
+                </div>
+                <label>
                           <TextField
                             onChange={onTextChangConsecutivo}
                             value={consecutivo}
                             label=""
                             />                        
                         </label>
-                </div>
                 {cart.map(x => (
                   <Card key={uuidv4()}>
                      <Grid container spacing={2}>
