@@ -16,6 +16,11 @@ Este proyecto permite implementar un CRM a la medida
 Plataforma en la nube que permita gestionar usuarios, clientes y
 cotizaciones
 ````
+
+## Despliegue
+https://ioyne.s3.amazonaws.com/index.html
+
+
 ![Build Status](https://res.cloudinary.com/drqk6qzo7/image/upload/v1675483569/cotizacionesfecha1_mrj6kx.png)
 
 
